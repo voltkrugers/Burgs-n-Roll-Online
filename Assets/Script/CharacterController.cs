@@ -9,8 +9,35 @@ public class CharacterController : MonoBehaviour
     {
         Vector2 inputVector = _gameInput.GetMouvementVector();
         Vector3 moveDir = new Vector3(inputVector.x, 0f,inputVector.y );
-        transform.position += moveDir * Time.deltaTime * speed;
 
+        float moveDistance = speed * Time.deltaTime;
+        float playerRadius = .7f;
+        float playerHeight = 2F;
+        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance);
+        
+        if (!canMove)
+        {
+            Vector3 moveDirX = new Vector3(moveDir.x, 0, 0);
+            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
+            if (canMove)
+            {
+                moveDir = moveDirX;
+            }
+            else
+            {
+                Vector3 moveDirZ = new Vector3(0, 0, moveDir.z);
+                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
+                if (canMove)
+                {
+                    moveDir = moveDirZ;
+                }
+            }
+        }
+        if (canMove)
+        {
+            transform.position += moveDir * Time.deltaTime * speed;
+        }
+        
         isWalking = moveDir != Vector3.zero;
 
         float rotationSpeed = 10f;
