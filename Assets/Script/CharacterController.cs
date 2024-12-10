@@ -3,11 +3,31 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
+    
+    public static CharacterController Instance { get; private set; }
+
+    public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged; 
+    
+    public class OnSelectedCounterChangedEventArgs : EventArgs
+    {
+        public ClearCounter selectedCounter;
+    }
+    
     [SerializeField]private float speed = 9f;
     [SerializeField]private GameInput _gameInput ;
     [SerializeField]private LayerMask countersLayerMask ;
     private bool isWalking;
     private Vector3 lastInteractDir;
+    private ClearCounter selectedCounter;
+
+    private void Awake()
+    {
+        if (Instance !=null)
+        {
+            Debug.LogError("error Instance");
+        }
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -60,8 +80,19 @@ public class CharacterController : MonoBehaviour
         {
             if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
             {
-                
+                if (clearCounter != selectedCounter)
+                {
+                    SetSelectedCounter(clearCounter);
+                }
             }
+            else
+            {
+                SetSelectedCounter(null);
+            }
+        }
+        else
+        {
+            SetSelectedCounter(null);
         }
     }
 
@@ -102,5 +133,15 @@ public class CharacterController : MonoBehaviour
 
         float rotationSpeed = 10f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime*rotationSpeed);
+    }
+
+    private void SetSelectedCounter(ClearCounter selectedCounter)
+    {
+        this.selectedCounter = selectedCounter;
+        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
+        {
+            selectedCounter = selectedCounter
+        });
+        
     }
 }
