@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class CharacterController : MonoBehaviour
+public class CharacterController : MonoBehaviour, IKitchenObjParent
 {
     
     public static CharacterController Instance { get; private set; }
@@ -16,9 +17,13 @@ public class CharacterController : MonoBehaviour
     [SerializeField]private float speed = 9f;
     [SerializeField]private GameInput _gameInput ;
     [SerializeField]private LayerMask countersLayerMask ;
+    [SerializeField] private Transform kitchenObjHoldPoint;
+    
+    
     private bool isWalking;
     private Vector3 lastInteractDir;
     private ClearCounter selectedCounter;
+    private KitchenObj kitchenObj;
 
     private void Awake()
     {
@@ -55,7 +60,7 @@ public class CharacterController : MonoBehaviour
         {
             if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
             {
-                clearCounter.Interact();
+                clearCounter.Interact(this);
             }
         }
     }
@@ -143,5 +148,30 @@ public class CharacterController : MonoBehaviour
             selectedCounter = selectedCounter
         });
         
+    }
+    
+    public Transform GetKitchenObjFollowTransform()
+    {
+        return kitchenObjHoldPoint;
+    }
+
+    public void SetKitchenObject(KitchenObj kitchenObj)
+    {
+        this.kitchenObj = kitchenObj;
+    }
+
+    public KitchenObj GetKitchenObj()
+    {
+        return kitchenObj;
+    }
+
+    public void ClearKitchenObject()
+    {
+        kitchenObj = null;
+    }
+
+    public bool HasKitchenObj()
+    {
+        return kitchenObj != null;
     }
 }
