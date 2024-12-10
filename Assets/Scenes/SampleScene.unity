@@ -731,6 +731,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 370128837452881130, guid: b2fc5604dae84ab4686f6a5e58b7d92b, type: 3}
+      propertyPath: ObjSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 714605b68711a4d439c3c4a9f07e5238, type: 2}
     - target: {fileID: 763716902434263188, guid: b2fc5604dae84ab4686f6a5e58b7d92b, type: 3}
       propertyPath: m_Name
       value: ClearCounter (2)
@@ -897,6 +901,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 370128837452881130, guid: b2fc5604dae84ab4686f6a5e58b7d92b, type: 3}
+      propertyPath: ObjSo
+      value: 
+      objectReference: {fileID: 11400000, guid: bde684a37b822084f85d5be56a325aef, type: 2}
     - target: {fileID: 763716902434263188, guid: b2fc5604dae84ab4686f6a5e58b7d92b, type: 3}
       propertyPath: m_Name
       value: ClearCounter (1)
@@ -1055,6 +1063,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 370128837452881130, guid: b2fc5604dae84ab4686f6a5e58b7d92b, type: 3}
+      propertyPath: ObjSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 1e407344acdc8c848a82af19a39036e9, type: 2}
     - target: {fileID: 763716902434263188, guid: b2fc5604dae84ab4686f6a5e58b7d92b, type: 3}
       propertyPath: m_Name
       value: ClearCounter
