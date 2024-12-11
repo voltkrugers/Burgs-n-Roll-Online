@@ -11,7 +11,7 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
     
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
-        public ClearCounter selectedCounter;
+        public BaseCounter selectedCounter;
     }
     
     [SerializeField]private float speed = 9f;
@@ -22,7 +22,7 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
     
     private bool isWalking;
     private Vector3 lastInteractDir;
-    private ClearCounter selectedCounter;
+    private BaseCounter selectedCounter;
     private KitchenObj kitchenObj;
 
     private void Awake()
@@ -47,21 +47,10 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
     
     private void OnInteractAction(object sender, EventArgs e)
     {
-        Vector2 inputVector = _gameInput.GetMouvementVector();
-        Vector3 moveDir = new Vector3(inputVector.x, 0f,inputVector.y );
-        float interactDistance = 2f;
 
-        if (moveDir != Vector3.zero)
+        if (selectedCounter!=null)
         {
-            lastInteractDir = moveDir;
-        }
-
-        if (Physics.Raycast(transform.position,lastInteractDir,out RaycastHit raycastHit,interactDistance,countersLayerMask))
-        {
-            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
-            {
-                clearCounter.Interact(this);
-            }
+            selectedCounter.Interact(this);
         }
     }
     
@@ -83,11 +72,11 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
 
         if (Physics.Raycast(transform.position,lastInteractDir,out RaycastHit raycastHit,interactDistance,countersLayerMask))
         {
-            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
+            if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter))
             {
-                if (clearCounter != selectedCounter)
+                if (baseCounter != selectedCounter)
                 {
-                    SetSelectedCounter(clearCounter);
+                    SetSelectedCounter(baseCounter);
                 }
             }
             else
@@ -140,7 +129,7 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime*rotationSpeed);
     }
 
-    private void SetSelectedCounter(ClearCounter selectedCounter)
+    private void SetSelectedCounter(BaseCounter selectedCounter)
     {
         this.selectedCounter = selectedCounter;
         OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs

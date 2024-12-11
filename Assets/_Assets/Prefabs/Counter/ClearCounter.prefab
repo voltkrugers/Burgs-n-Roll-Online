@@ -71,6 +71,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjSo: {fileID: 0}
   CounterTopPoint: {fileID: 5014349862423793611}
+  second: {fileID: 0}
+  testing: 0
 --- !u!1 &2296177517727026494
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a62f0d3c54c1f4ca32c420ff36470a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearCounter: {fileID: 370128837452881130}
+  baseCounter: {fileID: 370128837452881130}
   visualGameObject: {fileID: 4735841811919019936}
 --- !u!1 &4735841811919019936 stripped
 GameObject:
