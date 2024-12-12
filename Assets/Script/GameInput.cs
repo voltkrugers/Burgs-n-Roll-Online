@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameInput : MonoBehaviour
 {
     public EventHandler OnInteractAction;
+    public EventHandler OnSecondInteractAction;
     private PlayerInputActions _playerInputActions;
     private void Awake()
     {
@@ -11,7 +12,13 @@ public class GameInput : MonoBehaviour
         _playerInputActions.Player.Enable();
 
         _playerInputActions.Player.Interact.performed += interactPerf;
+        _playerInputActions.Player.SecondInteract.performed += SecondinteractPerf;
     }
+    private void SecondinteractPerf(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnSecondInteractAction?.Invoke(this,EventArgs.Empty);   
+    }
+    
 
     private void interactPerf(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {

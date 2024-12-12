@@ -37,6 +37,7 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
     private void Start()
     {
         _gameInput.OnInteractAction += OnInteractAction;
+        _gameInput.OnSecondInteractAction += OnSecondInteractAction;
     }
 
     void Update()
@@ -45,9 +46,15 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
        HandleInteraction();
     }
     
+    private void OnSecondInteractAction(object sender, EventArgs e)
+    {
+        if (selectedCounter!=null)
+        {
+            selectedCounter.SecondInteract(this);
+        }
+    }
     private void OnInteractAction(object sender, EventArgs e)
     {
-
         if (selectedCounter!=null)
         {
             selectedCounter.Interact(this);
@@ -103,7 +110,7 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
         if (!canMove)
         {
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0);
-            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
+            canMove = moveDir.x!=0 &&!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
             if (canMove)
             {
                 moveDir = moveDirX;
@@ -111,7 +118,7 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
             else
             {
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z);
-                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
+                canMove = moveDir.z!=0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
                 if (canMove)
                 {
                     moveDir = moveDirZ;

@@ -22,20 +22,18 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SecondInteract",
+                    "type": "Button",
+                    "id": "aa36e937-1dc6-4a64-a63b-86d1f2aa00c4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "7bbdecd8-6a2f-49a5-aec7-053a256b276e",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "ZQSD",
                     "id": "2e41e594-740f-4c50-8ae9-78358fe8022f",
@@ -104,17 +102,6 @@
                 },
                 {
                     "name": "",
-                    "id": "120d02b3-b682-414e-af2a-a10da0a329f2",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4d01ec84-00d5-40b4-86f0-8a365bfe1b55",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -132,6 +119,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4a0adfa5-8a91-4517-a085-e8ada91432e7",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e938ee4-36e2-418f-8b10-cf52732791c4",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondInteract",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
