@@ -14,6 +14,10 @@ public class BaseCounter : MonoBehaviour , IKitchenObjParent
     {
         
     }
+    public virtual void AllowBirdPickup(IABird bird)
+    {
+
+    }
 
     public Transform GetKitchenObjFollowTransform()
     {

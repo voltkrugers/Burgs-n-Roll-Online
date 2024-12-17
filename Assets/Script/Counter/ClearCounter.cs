@@ -1,11 +1,9 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ClearCounter : BaseCounter
 {
-    [SerializeField] private KitchenObjSO ObjSo;
-    
-
     public override void Interact(CharacterController player)
     {
         if (!HasKitchenObj())
@@ -27,5 +25,17 @@ public class ClearCounter : BaseCounter
             }
         }
     }
-    
+
+    public override void AllowBirdPickup(IABird bird)
+    {
+        if (HasKitchenObj() && !bird.HasKitchenObj())
+        {
+            KitchenObj obj = GetKitchenObj();
+            obj.SetKitchenObjParent(bird);
+            bird.PickUpObject(obj);
+        }else if (!HasKitchenObj() && bird.HasKitchenObj())
+        {
+            bird.GetKitchenObj().SetKitchenObjParent(this);
+        }
+    }
 }

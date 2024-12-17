@@ -4,7 +4,6 @@ using UnityEngine.Serialization;
 
 public class CharacterController : MonoBehaviour, IKitchenObjParent
 {
-    
     public static CharacterController Instance { get; private set; }
 
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged; 

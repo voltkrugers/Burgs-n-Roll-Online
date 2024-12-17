@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3812876574508226176}
   - component: {fileID: 7207111661554481900}
-  m_Layer: 0
+  - component: {fileID: 8104471459687804006}
+  m_Layer: 7
   m_Name: CheeseBlock_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,6 +47,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenObjSo: {fileID: 11400000, guid: bde684a37b822084f85d5be56a325aef, type: 2}
+--- !u!65 &8104471459687804006
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3812876574508226177}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.15953344, y: 0.2531798, z: 0.14441815}
+  m_Center: {x: 0.019663483, y: 0.14551854, z: 0.0011056513}
 --- !u!1001 &1845905871233530044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117,6 +139,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d3276783f87737c40af5623adad447ec, type: 3}
       propertyPath: m_Name
       value: Cheese block
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d3276783f87737c40af5623adad447ec, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
