@@ -77,6 +77,7 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
 
     private IEnumerator StunCoroutine(float duration)
     {
+        Debug.Log("je suis stun 3 sec!!!");
         
         isStunned = true;
         yield return new WaitForSeconds(duration);
