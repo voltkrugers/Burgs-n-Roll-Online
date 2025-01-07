@@ -77,6 +77,7 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
 
     private IEnumerator StunCoroutine(float duration)
     {
+        
         isStunned = true;
         yield return new WaitForSeconds(duration);
         isStunned = false;
@@ -122,34 +123,38 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
         float playerRadius = .7f;
         float playerHeight = 2F;
         bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance);
-        
-        if (!canMove)
+        if (!isStunned)
         {
-            Vector3 moveDirX = new Vector3(moveDir.x, 0, 0);
-            canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
-            if (canMove)
+            if (!canMove)
             {
-                moveDir = moveDirX;
-            }
-            else
-            {
-                Vector3 moveDirZ = new Vector3(0, 0, moveDir.z);
-                canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
+                Vector3 moveDirX = new Vector3(moveDir.x, 0, 0);
+                canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
                 if (canMove)
                 {
-                    moveDir = moveDirZ;
+                    moveDir = moveDirX;
+                }
+                else
+                {
+                    Vector3 moveDirZ = new Vector3(0, 0, moveDir.z);
+                    canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
+                    if (canMove)
+                    {
+                        moveDir = moveDirZ;
+                    }
                 }
             }
-        }
-        if (canMove)
-        {
-            transform.position += moveDir * Time.deltaTime * speed;
+            if (canMove)
+            {
+                transform.position += moveDir * Time.deltaTime * speed;
+            }
+                    
+            isWalking = moveDir != Vector3.zero;
+
+            float rotationSpeed = 10f;
+            transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
         }
         
-        isWalking = moveDir != Vector3.zero;
 
-        float rotationSpeed = 10f;
-        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
     }
 
     private void SetSelectedCounter(BaseCounter selectedCounter)

@@ -22,10 +22,18 @@ public class IASpider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.tag);
+        if (other.CompareTag("Player"))
         {
-            if (other.gameObject.CompareTag("Player"))
+            CharacterController playerController = other.GetComponent<CharacterController>();
+        
+            if (playerController != null)
             {
-                GetComponent<CharacterController>().StunCharacter(1);   
+                playerController.StunCharacter(3);
+            }
+            else
+            {
+                Debug.LogError("CharacterController is missing on the Player!");
             }
         }
     }
