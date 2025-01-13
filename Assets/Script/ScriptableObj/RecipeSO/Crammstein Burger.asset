@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24dda5c78732524db99320227dff4c1, type: 3}
+  m_Name: Crammstein Burger
+  m_EditorClassIdentifier: 
+  KitchenObjSoList:
+  - {fileID: 11400000, guid: 94cb979cc426b0e42b04818cde9c49b6, type: 2}
+  - {fileID: 11400000, guid: 13a04e9071c649d41ad45a9b5ab5c236, type: 2}
+  - {fileID: 11400000, guid: 77b79b618c00de14caa31e6162818d00, type: 2}
+  - {fileID: 11400000, guid: 7da1fbebe4c77ee4eafee641df14a6b3, type: 2}
+  - {fileID: 11400000, guid: d39b984989b8534469d768aeb343d095, type: 2}
+  RecipeName: Crammstein Burger
