@@ -8,6 +8,7 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
     public static CharacterController Instance { get; private set; }
 
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged; 
+    public event EventHandler OnPickedSomething; 
     
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
@@ -154,6 +155,11 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
     public void SetKitchenObject(KitchenObj kitchenObj)
     {
         this.kitchenObj = kitchenObj;
+
+        if (kitchenObj!=null)
+        {
+            OnPickedSomething?.Invoke(this,EventArgs.Empty);
+        }
     }
 
     public KitchenObj GetKitchenObj()
