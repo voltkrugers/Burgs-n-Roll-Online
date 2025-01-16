@@ -49,13 +49,15 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
     
     private void OnSecondInteractAction(object sender, EventArgs e)
     {
-        if (selectedCounter!=null)
+        if(!KitchenGameManager.Instance.IsGamePlaying()) return;
+        if (selectedCounter != null)
         {
             selectedCounter.SecondInteract(this);
         }
     }
     private void OnInteractAction(object sender, EventArgs e)
     {
+        if(!KitchenGameManager.Instance.IsGamePlaying()) return;
         if (selectedCounter!=null)
         {
             selectedCounter.Interact(this);
