@@ -20,7 +20,16 @@ public class GameInput : MonoBehaviour
         _playerInputActions.Player.SecondInteract.performed += SecondinteractPerf;
         _playerInputActions.Player.Pause.performed += PausePerf;
     }
-    
+
+    private void OnDestroy()
+    {
+        _playerInputActions.Player.Interact.performed -= interactPerf;
+        _playerInputActions.Player.SecondInteract.performed -= SecondinteractPerf;
+        _playerInputActions.Player.Pause.performed -= PausePerf;
+        
+        _playerInputActions.Dispose();
+    }
+
 
     private void PausePerf(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {

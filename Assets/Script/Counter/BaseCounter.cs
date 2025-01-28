@@ -6,6 +6,12 @@ public class BaseCounter : MonoBehaviour , IKitchenObjParent
 
     public static event EventHandler OnAnyObjectPlacedHere; 
     
+    new public static void ResetStaticData()
+    {
+        OnAnyObjectPlacedHere = null;
+    }
+    
+    
     [SerializeField] private Transform CounterTopPoint;
     
     protected KitchenObj kitchenObj;

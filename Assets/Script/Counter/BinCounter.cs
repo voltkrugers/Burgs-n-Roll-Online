@@ -4,6 +4,10 @@ using UnityEngine;
 public class BinCounter : BaseCounter
 {
     public static event EventHandler OnAnyObjectTrashed; 
+    new public static void ResetStaticData()
+    {
+        OnAnyObjectTrashed = null;
+    }
     
     public override void Interact(CharacterController player)
     {
