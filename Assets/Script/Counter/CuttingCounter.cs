@@ -13,7 +13,7 @@ public class CuttingCounter : BaseCounter , IHasProgress
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler OnCut;
 
-    [SerializeField] private CuttingRecipeSO[] cuttingRecipeSoArray;
+    [SerializeField] public CuttingRecipeSO[] cuttingRecipeSoArray;
 
     private int cuttingProgress;
     

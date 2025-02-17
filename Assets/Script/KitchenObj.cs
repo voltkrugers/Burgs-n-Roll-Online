@@ -66,4 +66,9 @@ public class KitchenObj : MonoBehaviour
 
         return kitchenObj;
     }
+
+    public void SetKitchenObjSo(KitchenObjSO dummyKitchenObjSo)
+    {
+        this.kitchenObjSo = dummyKitchenObjSo;
+    }
 }
