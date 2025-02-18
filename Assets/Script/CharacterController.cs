@@ -1,11 +1,12 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class CharacterController : MonoBehaviour, IKitchenObjParent
+public class CharacterController : NetworkBehaviour, IKitchenObjParent
 {
     
-    public static CharacterController Instance { get; private set; }
+    //public static CharacterController Instance { get; private set; }
 
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged; 
     public event EventHandler OnPickedSomething; 
@@ -16,7 +17,6 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
     }
     
     [SerializeField]private float speed = 9f;
-    [SerializeField]private GameInput _gameInput ;
     [SerializeField]private LayerMask countersLayerMask ;
     [SerializeField] private Transform kitchenObjHoldPoint;
     
@@ -26,19 +26,19 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
     private BaseCounter selectedCounter;
     private KitchenObj kitchenObj;
 
-    private void Awake()
-    {
-        if (Instance !=null)
-        {
-            Debug.LogError("error Instance");
-        }
-        Instance = this;
-    }
+    // private void Awake()
+    // {
+    //     if (Instance !=null)
+    //     {
+    //         Debug.LogError("error Instance");
+    //     }
+    //     Instance = this;
+    // }
 
     private void Start()
     {
-        _gameInput.OnInteractAction += OnInteractAction;
-        _gameInput.OnSecondInteractAction += OnSecondInteractAction;
+        GameInput.Instance.OnInteractAction += OnInteractAction;
+        GameInput.Instance.OnSecondInteractAction += OnSecondInteractAction;
     }
 
     void Update()
@@ -71,7 +71,7 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
 
     private void HandleInteraction()
     {
-        Vector2 inputVector = _gameInput.GetMouvementVector();
+        Vector2 inputVector = GameInput.Instance.GetMouvementVector();
         Vector3 moveDir = new Vector3(inputVector.x, 0f,inputVector.y );
         float interactDistance = 2f;
 
@@ -102,7 +102,7 @@ public class CharacterController : MonoBehaviour, IKitchenObjParent
 
     private void HandleMovement()
     {
-        Vector2 inputVector = _gameInput.GetMouvementVector();
+        Vector2 inputVector = GameInput.Instance.GetMouvementVector();
         Vector3 moveDir = new Vector3(inputVector.x, 0f,inputVector.y );
 
         float moveDistance = speed * Time.deltaTime;

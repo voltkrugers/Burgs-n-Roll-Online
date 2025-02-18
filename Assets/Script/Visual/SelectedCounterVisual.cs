@@ -1,4 +1,3 @@
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -8,7 +7,7 @@ public class SelectedCounterVisual : MonoBehaviour
     [SerializeField] private GameObject visualGameObject;
     void Start()
     {
-        CharacterController.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
+        //CharacterController.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
     }
 
     private void Player_OnSelectedCounterChanged(object sender, CharacterController.OnSelectedCounterChangedEventArgs e)
