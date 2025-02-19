@@ -43,8 +43,13 @@ public class CharacterController : NetworkBehaviour, IKitchenObjParent
 
     void Update()
     {
-       HandleMovement();
-       HandleInteraction();
+        if (!IsOwner)
+        {
+            return;
+        }
+        
+        HandleMovement();
+        HandleInteraction();
     }
     
     private void OnSecondInteractAction(object sender, EventArgs e)
@@ -99,6 +104,7 @@ public class CharacterController : NetworkBehaviour, IKitchenObjParent
             SetSelectedCounter(null);
         }
     }
+    
 
     private void HandleMovement()
     {
