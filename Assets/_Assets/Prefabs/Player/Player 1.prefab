@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 4158516301091477291}
   - component: {fileID: 2832686823639918437}
   - component: {fileID: 7198833499262366837}
+  - component: {fileID: 2958139514384302517}
   m_Layer: 0
   m_Name: FOX
   m_TagString: Untagged
@@ -446,6 +447,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6082102908725781995}
+--- !u!114 &2958139514384302517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550570232417154128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734b5fa36b388fd4ca3b7778f31ef06a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 2832686823639918437}
 --- !u!1 &7705457968256851077
 GameObject:
   m_ObjectHideFlags: 0
