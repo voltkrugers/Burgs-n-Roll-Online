@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3273347967625107823}
   - component: {fileID: 8390391974544170465}
   - component: {fileID: 6006581448135605387}
+  - component: {fileID: -5363402023711953684}
   m_Layer: 6
   m_Name: StoveCounter
   m_TagString: Untagged
@@ -76,6 +77,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 97d91603fcdbc2b47a6a458402518ba9, type: 2}
   BurningObjSoArray:
   - {fileID: 11400000, guid: da9d654041528714e80acf19d645d374, type: 2}
+--- !u!114 &-5363402023711953684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763716902434263188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &2296177517727026494
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class CharacterController : NetworkBehaviour, IKitchenObjParent
 {
 
     public static event EventHandler OnAnyPlayerSpawned;
+    public static event EventHandler OnAnyPickedSomething;
 
     public static void ResetStaticData()
     {
@@ -173,6 +174,7 @@ public class CharacterController : NetworkBehaviour, IKitchenObjParent
         if (kitchenObj!=null)
         {
             OnPickedSomething?.Invoke(this,EventArgs.Empty);
+            OnAnyPickedSomething?.Invoke(this,EventArgs.Empty);
         }
     }
 
@@ -189,5 +191,10 @@ public class CharacterController : NetworkBehaviour, IKitchenObjParent
     public bool HasKitchenObj()
     {
         return kitchenObj != null;
+    }
+
+    public NetworkObject GetNetworkObject()
+    {
+        return NetworkObject;
     }
 }

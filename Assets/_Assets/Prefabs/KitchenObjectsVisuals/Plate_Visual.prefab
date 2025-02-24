@@ -216,6 +216,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3812876574508226176}
   - component: {fileID: -4167756826651962600}
+  - component: {fileID: 6620742213213261126}
+  - component: {fileID: -8124919623295102710}
   m_Layer: 0
   m_Name: Plate_Visual
   m_TagString: Untagged
@@ -261,6 +263,34 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fdc0c641b54a68048bf0a8b9980dfabc, type: 2}
   - {fileID: 11400000, guid: 7da1fbebe4c77ee4eafee641df14a6b3, type: 2}
   - {fileID: 11400000, guid: 77b79b618c00de14caa31e6162818d00, type: 2}
+--- !u!114 &6620742213213261126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3812876574508226177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &-8124919623295102710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3812876574508226177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8496c0a19adf15c428ff957d17773fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4857453262998425354
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,9 +579,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlateCompleteVisual
       objectReference: {fileID: 0}
+    - target: {fileID: 2351080375409119920, guid: 10e39c981f2de6441b54efde32ced8f0, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 951099334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299251164193467165, guid: 10e39c981f2de6441b54efde32ced8f0, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 951099334
+      objectReference: {fileID: 0}
     - target: {fileID: 3550707552375629789, guid: 10e39c981f2de6441b54efde32ced8f0, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5647299390229609085, guid: 10e39c981f2de6441b54efde32ced8f0, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 951099334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063378356587759800, guid: 10e39c981f2de6441b54efde32ced8f0, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 951099334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7201447351377657825, guid: 10e39c981f2de6441b54efde32ced8f0, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 951099334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7822980115916120537, guid: 10e39c981f2de6441b54efde32ced8f0, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 951099334
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

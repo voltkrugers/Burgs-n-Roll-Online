@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3273347967625107823}
   - component: {fileID: 8390391974544170465}
   - component: {fileID: 1165337013496563689}
+  - component: {fileID: -6237174019710899247}
   m_Layer: 6
   m_Name: PlatesCounter
   m_TagString: Untagged
@@ -71,6 +72,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CounterTopPoint: {fileID: 5014349862423793611}
   plateKitchenObjectSo: {fileID: 11400000, guid: abe6352497dc7cc49afbc94ce9188db4, type: 2}
+--- !u!114 &-6237174019710899247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763716902434263188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &2296177517727026494
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd35ea69357aa1340b5f78e3c119c653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platesCounter: {fileID: 0}
   counterTopPoint: {fileID: 5014349862423793611}
   plateVisualPrefab: {fileID: 3812876574508226176, guid: c0c9afd619b40914a8f625c0535e2284, type: 3}
 --- !u!4 &927668446167772435 stripped
