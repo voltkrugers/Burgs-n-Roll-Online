@@ -1,4 +1,5 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
 public class CuttingCounter : BaseCounter , IHasProgress
@@ -25,15 +26,9 @@ public class CuttingCounter : BaseCounter , IHasProgress
             {
                 if (HasRecipeWithInput(player.GetKitchenObj().GetKitchenObjSo()))
                 {
-                    player.GetKitchenObj().SetKitchenObjParent(this);
-                    cuttingProgress = 0;
-
-                    CuttingRecipeSO cuttingRecipeSo = getCuttingRecipeSoWithInput(GetKitchenObj().GetKitchenObjSo());
-                    
-                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
-                    {
-                        ProgressNormalized = (float)cuttingProgress/ cuttingRecipeSo.cuttingProgressMax
-                    });
+                    KitchenObj kitchenObj = player.GetKitchenObj();
+                    kitchenObj.SetKitchenObjParent(this);
+                    InteractLogicPlaceObjectOnCounterServerRpc();
                 }
             }
         }
@@ -60,33 +55,71 @@ public class CuttingCounter : BaseCounter , IHasProgress
         }
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    private void InteractLogicPlaceObjectOnCounterServerRpc()
+    {
+        InteractLogicPlaceObjectOnCounterClientRpc();
+    }
+
+    [ClientRpc]
+    private void InteractLogicPlaceObjectOnCounterClientRpc()
+    {
+        cuttingProgress = 0;
+        
+        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+        {
+            ProgressNormalized = 0f
+        });
+    }
+
     public override void SecondInteract(CharacterController player)
     {
         if (HasKitchenObj() && HasRecipeWithInput(GetKitchenObj().GetKitchenObjSo()))
         {
-            cuttingProgress++;
-
-            OnCut?.Invoke(this,EventArgs.Empty);
-            OnAnyCut?.Invoke(this,EventArgs.Empty);
-            
-            CuttingRecipeSO cuttingRecipeSo = getCuttingRecipeSoWithInput(GetKitchenObj().GetKitchenObjSo());
-            
-            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
-            {
-                ProgressNormalized = (float)cuttingProgress/ cuttingRecipeSo.cuttingProgressMax
-            });
-
-            if (cuttingProgress >= cuttingRecipeSo.cuttingProgressMax)
-            {
-                KitchenObjSO outputKitchenObjSo = GetOutputForInput(GetKitchenObj().GetKitchenObjSo());
-            
-                GetKitchenObj().DestroySelf();
-            
-                KitchenObj.SpawnKitchenObj(outputKitchenObjSo, this);
-            }
+            CutObjectServerRpc();
+            TestCuttingProgressDoneServerRpc();
         }
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    private void CutObjectServerRpc()
+    {
+        CutObjectClientRpc();
+    }
+
+    [ClientRpc]
+    private void CutObjectClientRpc()
+    {
+        cuttingProgress++;
+
+        OnCut?.Invoke(this,EventArgs.Empty);
+        OnAnyCut?.Invoke(this,EventArgs.Empty);
+            
+        CuttingRecipeSO cuttingRecipeSo = getCuttingRecipeSoWithInput(GetKitchenObj().GetKitchenObjSo());
+            
+        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+        {
+            ProgressNormalized = (float)cuttingProgress/ cuttingRecipeSo.cuttingProgressMax
+        });
+
+
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void TestCuttingProgressDoneServerRpc()
+    {
+        CuttingRecipeSO cuttingRecipeSo = getCuttingRecipeSoWithInput(GetKitchenObj().GetKitchenObjSo());
+        
+        if (cuttingProgress >= cuttingRecipeSo.cuttingProgressMax)
+        {
+            KitchenObjSO outputKitchenObjSo = GetOutputForInput(GetKitchenObj().GetKitchenObjSo());
+            
+            KitchenObj.DestroyKitchenObject(GetKitchenObj());
+            
+            KitchenObj.SpawnKitchenObj(outputKitchenObjSo, this);
+        }
+    }
+    
     private bool HasRecipeWithInput(KitchenObjSO inputKitchenObjSo)
     {
         foreach (var cuttingRecipeSo in cuttingRecipeSoArray)
