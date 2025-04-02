@@ -16,7 +16,7 @@ public class DeliveryManager : NetworkBehaviour
     [SerializeField] private RecipeListSO recipeListSo;
     
     private List<RecipeSO> WaitingRecipeSOList;
-    private float SpawnRecipeTimer  =4f;
+    private float SpawnRecipeTimer  = 4f;
     private float SpawnRecipeTimerMax = 4f;
     private int WaitingRecipesMax = 4;
     private int SuccessfulRecipe = 0;
@@ -38,7 +38,7 @@ public class DeliveryManager : NetworkBehaviour
         if (SpawnRecipeTimer <= 0f)
         {
             SpawnRecipeTimer = SpawnRecipeTimerMax;
-            if (WaitingRecipeSOList.Count<WaitingRecipesMax)
+            if (KitchenGameManager.Instance.IsGamePlaying() && WaitingRecipeSOList.Count<WaitingRecipesMax)
             {
                 int waitRecipeSOIndex = Random.Range(0, recipeListSo.RecipeSoList.Count);
                 

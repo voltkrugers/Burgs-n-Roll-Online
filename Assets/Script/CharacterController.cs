@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -24,7 +25,9 @@ public class CharacterController : NetworkBehaviour, IKitchenObjParent
     
     [SerializeField]private float speed = 9f;
     [SerializeField]private LayerMask countersLayerMask ;
+    [SerializeField]private LayerMask CollisionsLayerMask ;
     [SerializeField] private Transform kitchenObjHoldPoint;
+    [SerializeField] private List<Vector3> spawnPositionList;
     
     
     private bool isWalking;
@@ -45,6 +48,8 @@ public class CharacterController : NetworkBehaviour, IKitchenObjParent
         {
             LocalInstance = this;
         }
+
+        transform.position = spawnPositionList[(int)OwnerClientId];
         OnAnyPlayerSpawned?.Invoke(this,EventArgs.Empty);
     }
 
@@ -121,12 +126,12 @@ public class CharacterController : NetworkBehaviour, IKitchenObjParent
         float moveDistance = speed * Time.deltaTime;
         float playerRadius = .7f;
         float playerHeight = 2F;
-        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance);
+        bool canMove = !Physics.BoxCast(transform.position, Vector3.one * playerRadius , moveDir,Quaternion.identity, moveDistance,CollisionsLayerMask);
         
         if (!canMove)
         {
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0);
-            canMove = moveDir.x!=0 &&!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
+            canMove = moveDir.x!=0 &&!Physics.BoxCast(transform.position, Vector3.one * playerRadius , moveDirX,Quaternion.identity, moveDistance,CollisionsLayerMask);
             if (canMove)
             {
                 moveDir = moveDirX;
@@ -134,7 +139,7 @@ public class CharacterController : NetworkBehaviour, IKitchenObjParent
             else
             {
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z);
-                canMove = moveDir.z!=0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
+                canMove = moveDir.z!=0 && !Physics.BoxCast(transform.position, Vector3.one * playerRadius , moveDirZ,Quaternion.identity, moveDistance,CollisionsLayerMask);
                 if (canMove)
                 {
                     moveDir = moveDirZ;
