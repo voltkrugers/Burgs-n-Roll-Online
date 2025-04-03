@@ -50,7 +50,20 @@ public class CharacterController : NetworkBehaviour, IKitchenObjParent
         }
 
         transform.position = spawnPositionList[(int)OwnerClientId];
+        
         OnAnyPlayerSpawned?.Invoke(this,EventArgs.Empty);
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnclientDisconnectCallback;
+        }
+    }
+
+    private void NetworkManager_OnclientDisconnectCallback(ulong ClientId)
+    {
+        if (ClientId == OwnerClientId && HasKitchenObj())
+        {
+            KitchenObj.DestroyKitchenObject(GetKitchenObj());
+        }
     }
 
     void Update()
