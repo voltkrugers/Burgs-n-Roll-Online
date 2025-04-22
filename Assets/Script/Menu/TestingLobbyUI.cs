@@ -1,9 +1,8 @@
 using System;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TestingNetcodeUI : MonoBehaviour
+public class TestingLobbyUI : MonoBehaviour
 {
     [SerializeField] private Button startHostButton;
     [SerializeField] private Button startClientButton;
@@ -12,17 +11,11 @@ public class TestingNetcodeUI : MonoBehaviour
         startHostButton.onClick.AddListener(() =>
         {
             KitchenGameMultiplayer.Instance.StartHost();
-            Hide();
+            Loader.LoadNetwork(Loader.Scene.CharacterSelectedScene);
         });        
         startClientButton.onClick.AddListener(() =>
         {
             KitchenGameMultiplayer.Instance.StartClient();
-            Hide();
         });
-    }
-
-    private void Hide()
-    {
-        gameObject.SetActive(false);
     }
 }

@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &142545109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 142545110}
+  m_Layer: 0
+  m_Name: MainMenuCleanUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &142545110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142545109}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 435.99344, y: 253.48653, z: 2.6956623}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &290008713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,6 +1659,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1910824060089397168, guid: a80342f9c43a8e044868fbfebe2d609d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 274510001
+      objectReference: {fileID: 0}
     - target: {fileID: 7194462393659844655, guid: a80342f9c43a8e044868fbfebe2d609d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.75
@@ -1676,9 +1711,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8644972501947226653, guid: a80342f9c43a8e044868fbfebe2d609d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 146119370
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6082102908725781995, guid: a80342f9c43a8e044868fbfebe2d609d, type: 3}
-    - {fileID: 7198833499262366837, guid: a80342f9c43a8e044868fbfebe2d609d, type: 3}
+    - {fileID: 0}
     - {fileID: 6714288813269089390, guid: a80342f9c43a8e044868fbfebe2d609d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2303,3 +2342,4 @@ SceneRoots:
   - {fileID: 298339109}
   - {fileID: 1943077998}
   - {fileID: 860218404}
+  - {fileID: 142545110}

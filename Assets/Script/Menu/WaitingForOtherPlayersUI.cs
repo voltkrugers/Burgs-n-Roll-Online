@@ -1,7 +1,8 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public class WaitingForOtherPlayersUI : MonoBehaviour
+public class WaitingForOtherPlayersUI : NetworkBehaviour
 {
     private void Start()
     {
@@ -21,6 +22,10 @@ public class WaitingForOtherPlayersUI : MonoBehaviour
 
     private void KitchenGameManager_OnLocalPlayerReadyChanged(object sender, EventArgs e)
     {
+        if (IsServer)
+        {
+            return;
+        }
         if (KitchenGameManager.Instance.IsLocalPlayerReady())
         {
             Show();
