@@ -4893,6 +4893,7 @@ GameObject:
   - component: {fileID: 574782382}
   - component: {fileID: 574782381}
   - component: {fileID: 574782380}
+  - component: {fileID: 574782383}
   m_Layer: 5
   m_Name: WaitingPlayerUI
   m_TagString: Untagged
@@ -4970,6 +4971,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574782378}
   m_CullTransparentMesh: 1
+--- !u!114 &574782383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574782378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3541834667
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &596513399
 GameObject:
   m_ObjectHideFlags: 0
