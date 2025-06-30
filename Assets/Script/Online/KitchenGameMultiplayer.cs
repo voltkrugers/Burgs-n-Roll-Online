@@ -70,7 +70,7 @@ public class KitchenGameMultiplayer : NetworkBehaviour
     public void StartHost()
     {
         // MODIF : assignation au lieu d'ajout
-        NetworkManager.Singleton.ConnectionApprovalCallback = NetworkManager_ConnectionApprovalCallback;
+        NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
         NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Server_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartHost();
@@ -96,10 +96,7 @@ public class KitchenGameMultiplayer : NetworkBehaviour
             clientId = clientId,
             colorId = GetFirstUnusedColorId()
         });
-
-        // Modification 3 : éviter que le serveur appelle les ServerRPC pour son propre client local
-        if (clientId == NetworkManager.Singleton.LocalClientId)
-            return;
+        
 
         SetPlayerNameServerRpc(GetPlayerName());
         SetPlayerIdServerRpc(AuthenticationService.Instance.PlayerId);
@@ -134,10 +131,6 @@ public class KitchenGameMultiplayer : NetworkBehaviour
 
     private void NetworkManager_Client_OnClientConnectedCallback(ulong clientId)
     {
-        // Modification 4 : éviter d’appeler les ServerRPC pour le client local
-        if (clientId == NetworkManager.Singleton.LocalClientId)
-            return;
-
         SetPlayerNameServerRpc(GetPlayerName());
         SetPlayerIdServerRpc(AuthenticationService.Instance.PlayerId);
     }
@@ -146,7 +139,6 @@ public class KitchenGameMultiplayer : NetworkBehaviour
     private void SetPlayerNameServerRpc(string playerName, ServerRpcParams serverRpcParams = default)
     {
         int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId);
-        if (playerDataIndex == -1) return; // Modification 2 : protection si client introuvable
 
         PlayerData playerData = playerDataNetworkList[playerDataIndex];
         playerData.PlayerName = playerName;
@@ -157,7 +149,6 @@ public class KitchenGameMultiplayer : NetworkBehaviour
     private void SetPlayerIdServerRpc(string playerId, ServerRpcParams serverRpcParams = default)
     {
         int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId);
-        if (playerDataIndex == -1) return; // Modification 2 : protection si client introuvable
 
         PlayerData playerData = playerDataNetworkList[playerDataIndex];
         playerData.PlayerId = playerId;
@@ -178,16 +169,24 @@ public class KitchenGameMultiplayer : NetworkBehaviour
     private void SpawnKitchenObjectServerRpc(int kitchenObjSoIndex, NetworkObjectReference kitchenObjParentNetworkObjectReference)
     {
         KitchenObjSO kitchenObjSo = GetKitchenObjectSOFromIndex(kitchenObjSoIndex);
-        Transform kitchenObjectTransform = Instantiate(kitchenObjSo.prefab);
+        
 
-        NetworkObject kitchenObjecNetworkObject = kitchenObjectTransform.GetComponent<NetworkObject>();
-        kitchenObjecNetworkObject.Spawn(true);
-
-        KitchenObj kitchenObj = kitchenObjectTransform.GetComponent<KitchenObj>();
 
         kitchenObjParentNetworkObjectReference.TryGet(out NetworkObject kitchenObjectParentNetworkObject);
+
+        IKitchenObjParent kitchenObjectParent = kitchenObjectParentNetworkObject.GetComponent<IKitchenObjParent>();
+        
+        if (kitchenObjectParent.HasKitchenObj()) {
+            // Parent already spawned an object
+            return;
+        }
+        
+        Transform kitchenObjectTransform = Instantiate(kitchenObjSo.prefab);
+        NetworkObject kitchenObjecNetworkObject = kitchenObjectTransform.GetComponent<NetworkObject>();
+        kitchenObjecNetworkObject.Spawn(true);
         IKitchenObjParent kitchenObjParent = kitchenObjectParentNetworkObject.GetComponent<IKitchenObjParent>();
-        kitchenObj.SetKitchenObjParent(kitchenObjParent);
+        KitchenObj kitchenObject = kitchenObjectTransform.GetComponent<KitchenObj>();
+        kitchenObject.SetKitchenObjParent(kitchenObjParent);
     }
 
     public int GetKitchenObjectSOIndex(KitchenObjSO kitchenObjSo)
@@ -209,6 +208,12 @@ public class KitchenGameMultiplayer : NetworkBehaviour
     private void DestroyKitchenObjectServerRpc(NetworkObjectReference kitchenObjectNetworkObjectReference)
     {
         kitchenObjectNetworkObjectReference.TryGet(out NetworkObject kitchenObjectNetworkObject);
+        
+        if (kitchenObjectNetworkObject == null) {
+            // This object is already destroyed
+            return;
+        }
+        
         KitchenObj kitchenObj = kitchenObjectNetworkObject.GetComponent<KitchenObj>();
 
         ClearKitchenObjOnParentClientRpc(kitchenObjectNetworkObjectReference);
@@ -283,7 +288,7 @@ public class KitchenGameMultiplayer : NetworkBehaviour
         }
 
         int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId);
-        if (playerDataIndex == -1) return; // sécurité ajoutée
+        
 
         PlayerData playerData = playerDataNetworkList[playerDataIndex];
         playerData.colorId = colorId;
